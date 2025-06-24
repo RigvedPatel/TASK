@@ -1,0 +1,106 @@
+
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+#Load the dataset
+df = pd.read_csv("Airline Dataset Updated - v2.csv")
+
+#Show first few rows
+print("First 5 rows of the dataset:")
+print(df.head())
+
+#Show number of rows and columns
+print("\n Number of rows:", df.shape[0])
+print(" Number of columns:", df.shape[1])
+
+# Show column names
+print("\n Column names:")
+print(df.columns.tolist())
+
+#Show data types
+print("\n Data types of each column:")
+print(df.dtypes)
+
+#Show basic statistics for numeric columns
+print("\n Statistical summary (numerical columns):")
+print(df.describe())
+
+#Plot distribution of first 2 numeric columns
+numeric_cols = df.select_dtypes(include=np.number).columns.tolist()
+
+for col in numeric_cols[:2]:  # Only first 2 columns used
+    sns.histplot(df[col], kde=True)
+    plt.title(f"Distribution of {col}")
+    plt.xlabel(col)
+    plt.ylabel("Count")
+    plt.show()
+
+OUTPUT:- 
+First 5 rows of the dataset:
+  Passenger ID First Name Last Name  Gender  Age Nationality  \
+0       ABVWIg     Edithe    Leggis  Female   62       Japan   
+1       jkXXAX     Elwood      Catt    Male   62   Nicaragua   
+2       CdUz2g      Darby   Felgate    Male   67      Russia   
+3       BRS38V   Dominica      Pyle  Female   71       China   
+4       9kvTLo        Bay   Pencost    Male   21       China   
+
+                Airport Name Airport Country Code   Country Name  \
+0           Coldfoot Airport                   US  United States   
+1          Kugluktuk Airport                   CA         Canada   
+2     Grenoble-Isère Airport                   FR         France   
+3  Ottawa / Gatineau Airport                   CA         Canada   
+4            Gillespie Field                   US  United States   
+
+  Airport Continent     Continents Departure Date Arrival Airport  \
+0               NAM  North America      6/28/2022             CXF   
+1               NAM  North America     12/26/2022             YCO   
+2                EU         Europe      1/18/2022             GNB   
+3               NAM  North America      9/16/2022             YND   
+4               NAM  North America      2/25/2022             SEE   
+
+            Pilot Name Flight Status  
+0  Fransisco Hazeldine       On Time  
+1      Marla Parsonage       On Time  
+2         Rhonda Amber       On Time  
+3       Kacie Commucci       Delayed  
+4          Ebonee Tree       On Time  
+
+ Number of rows: 98619
+ Number of columns: 15
+
+ Column names:
+['Passenger ID', 'First Name', 'Last Name', 'Gender', 'Age', 'Nationality', 'Airport Name', 'Airport Country Code', 'Country Name', 'Airport Continent', 'Continents', 'Departure Date', 'Arrival Airport', 'Pilot Name', 'Flight Status']
+
+ Data types of each column:
+Passenger ID            object
+First Name              object
+Last Name               object
+Gender                  object
+Age                      int64
+Nationality             object
+Airport Name            object
+Airport Country Code    object
+Country Name            object
+Airport Continent       object
+Continents              object
+Departure Date          object
+Arrival Airport         object
+Pilot Name              object
+Flight Status           object
+dtype: object
+
+ Statistical summary (numerical columns):
+                Age
+count  98619.000000
+mean      45.504021
+std       25.929849
+min        1.000000
+25%       23.000000
+50%       46.000000
+75%       68.000000
+max       90.000000
+
+
+
